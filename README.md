@@ -168,7 +168,8 @@ This learning path was designed following principles from:
 
 - **GitHub:** [BahaaShk](https://github.com/BahaaShk)
 - **LinkedIn:** [Bahaa Shkair](https://linkedin.com/in/bahaa-shkair)
-- **Portfolio:** [bahaashk-portfolio.netlify.app](bahaashk-portfolio.netlify.app)
+- **Portfolio:** [bahaashk-portfolio](https://bahaashk-portfolio.netlify.app)
+
 
 ---
 
