@@ -3,7 +3,12 @@ import { useState } from "react";
 
 function App() {
   const [isDark, setIsDark] = useState(true);
+  const avatars = ['John', 'Sarah', "Mike", "Emma", "Alex"]
+  const [avatarSeed, setAvatarSeed] = useState(0);
 
+  const handleImageClick = () => {
+setAvatarSeed((avatarSeed + 1 ) % avatars.length)
+  }
   return (
     <div
       className={`min-h-screen flex items-center justify-center p-8 transition-colors duration-300 ${
@@ -11,7 +16,7 @@ function App() {
       }`}
     >
       <div
-        className={`w-full max-w-md rounded-2xl shadow-2xl overflow-hidden transition-colors duration-300 ${
+        className={`w-full max-w-md rounded-2xl shadow-2xl hover:-translate-y-4 overflow-hidden transition-all duration-300 ${
           isDark ? "bg-gray-900" : "bg-white"
         }`}
       >
@@ -34,9 +39,10 @@ function App() {
             <div className="relative">
               <div className="absolute inset-0 bg-linear-to-r from-purple-500 via-pink-500 to-orange-500 rounded-full blur-sm"></div>
               <img
-                src="https://api.dicebear.com/7.x/avataaars/svg?seed=John"
+                src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${avatars[avatarSeed]}`}
                 alt="Profile"
-                className="relative w-32 h-32 rounded-full border-4 border-gray-900 bg-gray-800"
+                onClick={handleImageClick}
+                className="relative w-32 h-32 rounded-full border-4 border-gray-900 bg-gray-800 cursor-pointer"
               />
             </div>
           </div>
@@ -79,8 +85,26 @@ mt-4"
           modern technologies. Coffee enthusiast ☕
         </p>
 
+        {/* My work : Skills */}
+<div className="flex flex-wrap justify-center gap-2 mt-4">
+  <span className={`px-3 py-1 rounded-full text-xs ${
+    isDark ? 'bg-purple-500/20 text-purple-300' : 'bg-purple-100 text-purple-700'
+  }`}>React</span>
+  
+  <span className={`px-3 py-1 rounded-full text-xs ${
+    isDark ? 'bg-blue-500/20 text-blue-300' : 'bg-blue-100 text-blue-700'
+  }`}>Tailwind</span>
+  
+  <span className={`px-3 py-1 rounded-full text-xs ${
+    isDark ? 'bg-green-500/20 text-green-300' : 'bg-green-100 text-green-700'
+  }`}>Node</span>
+  
+  <span className={`px-3 py-1 rounded-full text-xs ${
+    isDark ? 'bg-orange-500/20 text-orange-300' : 'bg-orange-100 text-orange-700'
+  }`}>MongoDB</span>
+</div>
         {/* Stats */}
-<div className="flex justify-around mt-6 py-4 border-y border-gray-800">
+<div className="flex justify-around mt-4 py-4 border-y border-gray-800">
   <div className="text-center">
     <div className={`text-2xl font-bold transition-colors ${
       isDark ? 'text-white' : 'text-gray-900'

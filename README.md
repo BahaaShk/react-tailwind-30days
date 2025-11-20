@@ -29,7 +29,7 @@ This repository chronicles my transformation from tutorial consumer to project b
 
 | Day | Project | Status | Key Learnings | Live Demo |
 |-----|---------|--------|---------------|-----------|
-| 01 | Profile Card | 🔄 In Progress | JSX, Tailwind utilities, props | - |
+| 01 | Profile Card | ✅ Complete | JSX, useState, conditional rendering, Tailwind gradients & transitions | [Code](./phase-1-foundations/day-01-profile-card) |
 | 02 | Button Library | ⏳ Upcoming | Reusable components, variants | - |
 | 03 | Color Palette Generator | ⏳ Upcoming | useState, event handlers | - |
 | 04-06 | TBD | ⏳ Upcoming | - | - |
@@ -101,7 +101,6 @@ react-tailwind-30days/
 Each project folder contains:
 - Full source code
 - Project-specific README with learnings
-- Screenshots of final result
 - Key code snippets and patterns used
 
 ---
@@ -129,7 +128,13 @@ npm run dev
 ## 💡 Key Takeaways (Updated Daily)
 
 ### Week 1
-- *Coming soon after Day 1...*
+**Day 01 - Profile Card:**
+- Learned useState for theme toggling and avatar switching
+- Mastered Tailwind conditional classes with template literals
+- Understood gradient syntax: `bg-gradient-to-r from-X via-Y to-Z`
+- Implemented smooth transitions with `transition-all duration-300`
+- Used transparency modifiers (`/20`, `/50`) for semi-transparent backgrounds
+- Practiced ternary operators for conditional state changes
 
 ### Week 2
 - *To be documented...*
@@ -144,11 +149,11 @@ npm run dev
 
 ## 📈 Progress Metrics
 
-- **Days Completed:** 0/30
-- **Projects Built:** 0/9
-- **Lines of Code:** ~0
-- **Components Created:** 0
-- **Concepts Mastered:** 0
+- **Days Completed:** 1/30
+- **Projects Built:** 1/9
+- **Lines of Code:** ~150
+- **Components Created:** 1
+- **Concepts Mastered:** 6
 
 *Updated daily as the journey progresses*
 
