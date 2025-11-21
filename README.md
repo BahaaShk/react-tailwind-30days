@@ -30,7 +30,7 @@ This repository chronicles my transformation from tutorial consumer to project b
 | Day | Project | Status | Key Learnings | Live Code |
 |-----|---------|--------|---------------|-----------|
 | 01 | Profile Card | ✅ Complete | useState, conditional rendering, Tailwind gradients & transitions | [Code](./src/phase-1-foundations/Day01ProfileCard.jsx) |
-| 02 | Button Library | ⏳ Upcoming | Reusable components, variants | - |
+| 02 | Button Library | ✅ Complete | Reusable components, props, variants, compound components | [Code](./src/phase-1-foundations/Day02ButtonLibrary.jsx) |
 | 03 | Color Palette Generator | ⏳ Upcoming | useState, event handlers | - |
 | 04-06 | TBD | ⏳ Upcoming | - | - |
 
@@ -170,6 +170,15 @@ npm run dev
 - Used transparency modifiers (`/20`, `/50`) for semi-transparent backgrounds
 - Practiced ternary operators for conditional state changes
 
+**Day 02 - Button Library:**
+- Created reusable component with multiple variants and sizes
+- Learned props with default values pattern
+- Mastered style configuration objects for variants
+- Implemented loading states with conditional rendering
+- Built compound components (ButtonGroup)
+- Used React.cloneElement and Children.toArray for advanced patterns
+
+
 ### Week 2
 - *To be documented...*
 
@@ -183,11 +192,11 @@ npm run dev
 
 ## 📈 Progress Metrics
 
-- **Days Completed:** 1/30
-- **Projects Built:** 1/9
-- **Lines of Code:** ~150
-- **Components Created:** 1
-- **Concepts Mastered:** 6
+- **Days Completed:** 2/30
+- **Projects Built:** 2/9
+- **Lines of Code:** ~450
+- **Components Created:** 3
+- **Concepts Mastered:** 12
 
 *Updated daily as the journey progresses*
 
