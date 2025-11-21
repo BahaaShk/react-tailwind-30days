@@ -18,7 +18,7 @@ This repository chronicles my transformation from tutorial consumer to project b
 - ✅ **Progressive complexity** from fundamentals to advanced patterns
 - ✅ **Portfolio-ready code** that demonstrates practical skills
 
-**Learning Method:** 70% guided building, 30% independent challenges
+**Learning Method:** Build-Along-Then-Solo (70% guided building, 30% independent challenges)
 
 ---
 
@@ -27,9 +27,9 @@ This repository chronicles my transformation from tutorial consumer to project b
 ### Phase 1: Foundation Projects (Days 1-6)
 *Mastering components, props, and Tailwind fundamentals*
 
-| Day | Project | Status | Key Learnings | Live Demo |
+| Day | Project | Status | Key Learnings | Live Code |
 |-----|---------|--------|---------------|-----------|
-| 01 | Profile Card | ✅ Complete | JSX, useState, conditional rendering, Tailwind gradients & transitions | [Code](./phase-1-foundations/day-01-profile-card) |
+| 01 | Profile Card | ✅ Complete | useState, conditional rendering, Tailwind gradients & transitions | [Code](./src/phase-1-foundations/Day01ProfileCard.jsx) |
 | 02 | Button Library | ⏳ Upcoming | Reusable components, variants | - |
 | 03 | Color Palette Generator | ⏳ Upcoming | useState, event handlers | - |
 | 04-06 | TBD | ⏳ Upcoming | - | - |
@@ -37,7 +37,7 @@ This repository chronicles my transformation from tutorial consumer to project b
 ### Phase 2: Interactive Apps (Days 7-15)
 *State management, APIs, and user interactions*
 
-| Day | Project | Status | Key Learnings | Live Demo |
+| Day | Project | Status | Key Learnings | Live Code |
 |-----|---------|--------|---------------|-----------|
 | 07-09 | Todo List App | ⏳ Upcoming | CRUD, localStorage, forms | - |
 | 10-12 | Pomodoro Timer | ⏳ Upcoming | useEffect, intervals, audio | - |
@@ -46,7 +46,7 @@ This repository chronicles my transformation from tutorial consumer to project b
 ### Phase 3: Real-World Projects (Days 16-30)
 *Complex features and portfolio-ready applications*
 
-| Day | Project | Status | Key Learnings | Live Demo |
+| Day | Project | Status | Key Learnings | Live Code |
 |-----|---------|--------|---------------|-----------|
 | 16-19 | Expense Tracker | ⏳ Upcoming | Data visualization, filtering | - |
 | 20-23 | Note-Taking App | ⏳ Upcoming | Rich text, search, categories | - |
@@ -63,10 +63,31 @@ This repository chronicles my transformation from tutorial consumer to project b
 - Tailwind CSS 4.x (Utility-first styling)
 - Vite (Build tool & dev server)
 
+**Architecture:**
+- Single-page application with component-based day navigation
+- Shared dependencies and configuration across all projects
+- Fast hot-reload for instant feedback
+
 **Libraries & Tools:**
 - Lucide React (Icons)
 - LocalStorage API (Data persistence)
 - Fetch API (HTTP requests)
+
+---
+
+## ⚡ Why Single Project Structure?
+
+This repository uses a **unified project approach** rather than separate folders per day:
+
+**Benefits:**
+- ✅ Install dependencies once, not 30 times
+- ✅ Instant switching between projects via navigation
+- ✅ Shared Tailwind configuration
+- ✅ Smaller repository size (~200MB vs 6GB)
+- ✅ Easier to maintain and deploy
+- ✅ Portfolio-ready showcase of all projects in one place
+
+**Navigation:** Use the built-in day selector in the top-left corner to jump between projects.
 
 ---
 
@@ -93,15 +114,25 @@ This repository chronicles my transformation from tutorial consumer to project b
 
 ```
 react-tailwind-30days/
-├── phase-1-foundations/      # Days 1-6: Core concepts
-├── phase-2-interactive/      # Days 7-15: State & APIs  
-├── phase-3-real-world/       # Days 16-30: Complex apps
+├── README.md
+├── package.json              # Shared dependencies
+├── vite.config.js            # Shared Vite config
+├── node_modules/             # Installed once
+└── src/
+    ├── App.jsx               # Day navigator/switcher
+    ├── main.jsx
+    ├── index.css
+    ├── phase-1/              # Days 1-6: Foundation
+    │   ├── Day01ProfileCard.jsx
+    │   ├── Day02ButtonLibrary.jsx
+    │   └── ...
+    ├── phase-2/              # Days 7-15: Interactive
+    │   └── ...
+    └── phase-3/              # Days 16-30: Real-world
+        └── ...
 ```
 
-Each project folder contains:
-- Full source code
-- Project-specific README with learnings
-- Key code snippets and patterns used
+**Single Vite project** with day navigation for fast switching between projects.
 
 ---
 
@@ -111,17 +142,20 @@ Each project folder contains:
 # Clone the repository
 git clone https://github.com/YOUR_USERNAME/react-tailwind-30days.git
 
-# Navigate to specific project
-cd react-tailwind-30days/phase-1-foundations/day-01-profile-card
+# Navigate to project root
+cd react-tailwind-30days
 
-# Install dependencies
+# Install dependencies (once!)
 npm install
 
 # Start development server
 npm run dev
 
 # Open http://localhost:5173 in your browser
+# Use the navigation menu to switch between days
 ```
+
+**All 30 days in one app** - just click the day selector to view different projects!
 
 ---
 
@@ -173,8 +207,7 @@ This learning path was designed following principles from:
 
 - **GitHub:** [BahaaShk](https://github.com/BahaaShk)
 - **LinkedIn:** [Bahaa Shkair](https://linkedin.com/in/bahaa-shkair)
-- **Portfolio:** [bahaashk-portfolio](https://bahaashk-portfolio.netlify.app)
-
+- **Portfolio:** [https://bahaashk-portfolio.netlify.app](https://bahaashk-portfolio.netlify.app)
 
 ---
 
@@ -196,6 +229,6 @@ This project is open source and available under the [MIT License](LICENSE).
 
 **⭐ Star this repo if you're following along or find it helpful!**
 
-*Last Updated: [Current Date]*
+*Last Updated: November 21, 2025*
 
 </div>

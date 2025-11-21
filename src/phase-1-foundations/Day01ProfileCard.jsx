@@ -1,7 +1,7 @@
 import { Moon, Sun, Mail, Github, Linkedin, MapPin } from "lucide-react";
 import { useState } from "react";
 
-function App() {
+function Day01ProfileCard() {
   const [isDark, setIsDark] = useState(true);
   const avatars = ['John', 'Sarah', "Mike", "Emma", "Alex"]
   const [avatarSeed, setAvatarSeed] = useState(0);
@@ -183,4 +183,4 @@ mt-4"
   );
 }
 
-export default App;
+export default Day01ProfileCard;
