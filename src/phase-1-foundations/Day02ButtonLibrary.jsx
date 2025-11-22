@@ -13,7 +13,7 @@ function Button({
 }) {
   const variants = {
     primary:
-      "bg-gradient-to-r from-blue-500 to-blue-600 text-white hover:from-blue-600 hover:to-blue-700 shadow-lg shadow-blue-500/50",
+      "bg-gradient-to-r from-blue-500 to-blue-600 text-white hover:from-blue-600 hover:to-blue-700 shadow-md shadow-blue-500/40",
     secondary:
       "bg-gray-200 text-gray-800 hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600",
     danger:
@@ -72,7 +72,7 @@ const ButtonGroup = ({ children }) => {
   const childrenArray = Children.toArray(children);
 
   return (
-    <div className={`flex`}>
+    <div className={`flex pb-4`}>
       {childrenArray.map((child, index) => {
         const isFirst = index === 0;
         const isLast = index === childrenArray.length - 1;
@@ -218,7 +218,7 @@ const Day02ButtonLibrary = () => {
     variant={activeBtn === 'active2' ? 'primary' : 'secondary'}
     onClick={() => setActiveBtn('active2')}
   >
-    Active
+    Active2
   </Button>
 </ButtonGroup>
         </div>
