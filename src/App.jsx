@@ -102,7 +102,7 @@ function App() {
               }
             `}
           >
-            Day 03 — Color Palette Generator
+            Day 03 — Palette Generator
           </button>
 
         </nav>
