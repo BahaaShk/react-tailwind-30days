@@ -91,6 +91,8 @@ export default function Day04QuizApp() {
       setScore(score + 1);
     }
 
+    const audio = new Audio('/splashing-water-443136.mp3').play()
+
     setShowResult(true);
   };
 
