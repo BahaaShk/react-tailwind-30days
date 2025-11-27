@@ -4,6 +4,7 @@ import { Menu, X } from "lucide-react";
 import Day01ProfileCard from "./phase-1-foundations/Day01ProfileCard";
 import Day02ButtonLibrary from "./phase-1-foundations/Day02ButtonLibrary";
 import Day03ColorPallete from "./phase-1-foundations/Day03ColorPallete";
+import Day04QuizApp from "./phase-1-foundations/Day04QuizApp";
 
 function App() {
   const [currentDay, setCurrentDay] = useState("day01");
@@ -17,6 +18,8 @@ function App() {
         return <Day02ButtonLibrary />;
       case "day03":
         return <Day03ColorPallete />;
+      case "day04":
+        return <Day04QuizApp />;
       default:
         return <Day01ProfileCard />;
     }
@@ -103,6 +106,19 @@ function App() {
             `}
           >
             Day 03 — Palette Generator
+          </button>
+
+          <button
+            onClick={() => changeDay("day04")}
+            className={`px-3 py-2 rounded text-left text-sm font-medium transition 
+              ${
+                currentDay === "day04"
+                  ? "bg-purple-600 text-white"
+                  : "bg-gray-200 dark:bg-gray-700 dark:text-gray-200 text-gray-800"
+              }
+            `}
+          >
+            Day 04 — Quiz App
           </button>
 
         </nav>
