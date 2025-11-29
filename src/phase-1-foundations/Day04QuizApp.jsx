@@ -12,12 +12,16 @@ export default function Day04QuizApp() {
         "Home Tool Markup Language",
         "Hyperlinks and Text Markup Language"
       ],
-      correct: 0
+      correct: 0,
+      category:"HTML",
+      difficulty:"easy"
     },
     {
       question: "Which CSS property is used to change text color?",
       options: ["text-color", "font-color", "color", "text-style"],
-      correct: 2
+      correct: 2,
+      category:"CSS",
+      difficulty:"medium"
     },
     {
       question: "What does 'useState' do in React?",
@@ -27,17 +31,23 @@ export default function Day04QuizApp() {
         "Handles routing",
         "Styles components"
       ],
-      correct: 1
+      correct: 1,
+      category:"REACT",
+      difficulty:"easy"
     },
     {
       question: "Which symbol is used for comments in JavaScript?",
       options: ["<!-- -->", "// or /* */", "# ", "' '"],
-      correct: 1
+      correct: 1,
+      category:"JAVASCRIPT",
+      difficulty:"hard"
     },
     {
       question: "What is the default port for a React development server?",
       options: ["8080", "3000", "5000", "3030"],
-      correct: 1
+      correct: 1,
+      category:"REACT",
+      difficulty:"easy"
     }
   ];
 
@@ -48,6 +58,12 @@ export default function Day04QuizApp() {
   const [answeredQuestions, setAnsweredQuestions] = useState([]);
   const [timeLeft, setTimeLeft] = useState(30);
   const [quizCompleted, setQuizCompleted] = useState(false);
+  const [leaderboard, setLeaderboard] = useState(() => {
+    const saved = localStorage.getItem("quizLeaderboard"); 
+    return saved ? JSON.parse(saved) : []
+  })
+  const [playerName, setPlayerName] = useState('');
+const [showNameInput, setShowNameInput] = useState(false);
 
   // Timer countdown
   useEffect(() => {
@@ -116,67 +132,169 @@ export default function Day04QuizApp() {
     setTimeLeft(30);
   };
 
+  const saveScore = () => {
+    if(!playerName.trim()){
+      alert("please enter your name"); 
+      return
+    }
+
+    const newScore = {
+      name: playerName,
+          score: score,
+    total: quizData.length,
+    percentage: Math.round((score / quizData.length) * 100),
+    date: new Date().toLocaleDateString()
+    }
+
+    const updatedLeaderboard = [...leaderboard, newScore]
+
+    updatedLeaderboard.sort((a,b) => b.score- a.score)
+    const top10 = updatedLeaderboard.slice(0,10)
+
+    localStorage.setItem("quizLeaderboard", JSON.stringify(top10))
+    setLeaderboard(top10)
+
+    setShowNameInput(false)
+  } 
+
   const getProgressPercentage = () => {
     return ((currentQuestion + 1) / quizData.length) * 100;
   };
 
   // Quiz completed screen
-  if (quizCompleted) {
-    const percentage = Math.round((score / quizData.length) * 100);
-    
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-purple-900 via-purple-800 to-indigo-900 flex items-center justify-center p-8">
-        <div className="max-w-2xl w-full bg-white rounded-2xl shadow-2xl p-8">
-          <div className="text-center">
-            <Trophy className="w-24 h-24 text-yellow-500 mx-auto mb-6" />
-            <h1 className="text-4xl font-bold text-gray-900 mb-4">
-              Quiz Completed! 🎉
-            </h1>
-            
-            <div className="bg-gradient-to-r from-purple-500 to-indigo-500 text-white rounded-xl p-8 mb-6">
-              <div className="text-6xl font-bold mb-2">
-                {score}/{quizData.length}
-              </div>
-              <div className="text-2xl">
-                {percentage}% Correct
+  // Quiz completed screen
+if (quizCompleted) {
+  const percentage = Math.round((score / quizData.length) * 100);
+  
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-purple-900 via-purple-800 to-indigo-900 flex items-center justify-center p-8">
+      <div className="max-w-2xl w-full bg-white rounded-2xl shadow-2xl p-8">
+        <div className="text-center">
+          <Trophy className="w-24 h-24 text-yellow-500 mx-auto mb-6" />
+          <h1 className="text-4xl font-bold text-gray-900 mb-4">
+            Quiz Completed! 🎉
+          </h1>
+          
+          <div className="bg-gradient-to-r from-purple-500 to-indigo-500 text-white rounded-xl p-8 mb-6">
+            <div className="text-6xl font-bold mb-2">
+              {score}/{quizData.length}
+            </div>
+            <div className="text-2xl">
+              {percentage}% Correct
+            </div>
+          </div>
+
+          {/* Name Input Section */}
+          {!showNameInput && !leaderboard.find(entry => entry.date === new Date().toLocaleDateString() && entry.score === score) ? (
+            <button
+              onClick={() => setShowNameInput(true)}
+              className="mb-6 px-6 py-3 bg-green-600 text-white rounded-lg font-bold hover:bg-green-700 transition-colors"
+            >
+              Save to Leaderboard 🏆
+            </button>
+          ) : showNameInput ? (
+            <div className="mb-6 p-4 bg-gray-100 rounded-lg">
+              <input
+                type="text"
+                placeholder="Enter your name..."
+                value={playerName}
+                onChange={(e) => setPlayerName(e.target.value)}
+                className="w-full px-4 py-2 border-2 border-purple-300 rounded-lg mb-3 focus:outline-none focus:border-purple-500"
+                maxLength={20}
+              />
+              <div className="flex gap-3 justify-center">
+                <button
+                  onClick={saveScore}
+                  className="px-6 py-2 bg-purple-600 text-white rounded-lg font-medium hover:bg-purple-700 transition-colors"
+                >
+                  Save Score
+                </button>
+                <button
+                  onClick={() => setShowNameInput(false)}
+                  className="px-6 py-2 bg-gray-400 text-white rounded-lg font-medium hover:bg-gray-500 transition-colors"
+                >
+                  Cancel
+                </button>
               </div>
             </div>
+          ) : null}
 
-            <div className="mb-6">
-              <h3 className="text-xl font-bold text-gray-800 mb-3">Your Answers:</h3>
-              <div className="space-y-2">
-                {answeredQuestions.map((answer, idx) => (
+          {/* Leaderboard Display */}
+          {leaderboard.length > 0 && (
+            <div className="mb-6 text-left">
+              <h3 className="text-2xl font-bold text-gray-800 mb-4 text-center">
+                🏆 Top Scores
+              </h3>
+              <div className="bg-gray-50 rounded-lg p-4">
+                {leaderboard.slice(0, 5).map((entry, idx) => (
                   <div
                     key={idx}
-                    className={`flex items-center justify-between p-3 rounded-lg ${
-                      answer.isCorrect ? 'bg-green-100' : 'bg-red-100'
+                    className={`flex items-center justify-between p-3 mb-2 rounded-lg ${
+                      idx === 0 ? 'bg-yellow-100 border-2 border-yellow-400' :
+                      idx === 1 ? 'bg-gray-200' :
+                      idx === 2 ? 'bg-orange-100' :
+                      'bg-white'
                     }`}
                   >
-                    <span className="text-gray-800 font-medium">
-                      Question {answer.question + 1}
-                    </span>
-                    {answer.isCorrect ? (
-                      <CheckCircle2 className="text-green-600" size={24} />
-                    ) : (
-                      <XCircle className="text-red-600" size={24} />
-                    )}
+                    <div className="flex items-center gap-3">
+                      <span className="text-2xl font-bold text-gray-600">
+                        {idx === 0 ? '🥇' : idx === 1 ? '🥈' : idx === 2 ? '🥉' : `#${idx + 1}`}
+                      </span>
+                      <div>
+                        <div className="font-bold text-gray-900">{entry.name}</div>
+                        <div className="text-sm text-gray-600">{entry.date}</div>
+                      </div>
+                    </div>
+                    <div className="text-right">
+                      <div className="text-2xl font-bold text-purple-600">
+                        {entry.score}/{entry.total}
+                      </div>
+                      <div className="text-sm text-gray-600">
+                        {entry.percentage}%
+                      </div>
+                    </div>
                   </div>
                 ))}
               </div>
             </div>
+          )}
 
-            <button
-              onClick={restartQuiz}
-              className="flex items-center gap-2 px-8 py-3 bg-gradient-to-r from-purple-500 to-indigo-500 text-white rounded-lg font-bold text-lg hover:opacity-90 transition-opacity mx-auto"
-            >
-              <RotateCcw size={20} />
-              Restart Quiz
-            </button>
+          {/* Your Answers section (keep existing code) */}
+          <div className="mb-6">
+            <h3 className="text-xl font-bold text-gray-800 mb-3">Your Answers:</h3>
+            <div className="space-y-2">
+              {answeredQuestions.map((answer, idx) => (
+                <div
+                  key={idx}
+                  className={`flex items-center justify-between p-3 rounded-lg ${
+                    answer.isCorrect ? 'bg-green-100' : 'bg-red-100'
+                  }`}
+                >
+                  <span className="text-gray-800 font-medium">
+                    Question {answer.question + 1}
+                  </span>
+                  {answer.isCorrect ? (
+                    <CheckCircle2 className="text-green-600" size={24} />
+                  ) : (
+                    <XCircle className="text-red-600" size={24} />
+                  )}
+                </div>
+              ))}
+            </div>
           </div>
+
+          <button
+            onClick={restartQuiz}
+            className="flex items-center gap-2 px-8 py-3 bg-gradient-to-r from-purple-500 to-indigo-500 text-white rounded-lg font-bold text-lg hover:opacity-90 transition-opacity mx-auto"
+          >
+            <RotateCcw size={20} />
+            Restart Quiz
+          </button>
         </div>
       </div>
-    );
-  }
+    </div>
+  );
+}
 
   // Quiz questions screen
   return (
@@ -214,7 +332,15 @@ export default function Day04QuizApp() {
 
         {/* Question Card */}
         <div className="bg-white p-8 mb-6">
-          <h3 className="text-2xl font-bold text-gray-900 mb-6">
+        <div className='flex justify-between'> 
+          <div className=' border-2 border-green-400 p-2 rounded-2xl bg-gray-300'>
+            {quizData[currentQuestion].category}
+            </div>
+          <div className={`border-2 border-white py-2 px-4 capitalize text-lg font-bold rounded-2xl text-gray-200 ${quizData[currentQuestion].difficulty === "easy" ?'bg-green-400' : quizData[currentQuestion].difficulty === "medium" ? "bg-yellow-400" : "bg-red-500"}`}>
+            {quizData[currentQuestion].difficulty}
+            </div>
+        </div>
+          <h3 className="text-2xl font-bold text-gray-900 mb-6 mt-2">
             {quizData[currentQuestion].question}
           </h3>
 
