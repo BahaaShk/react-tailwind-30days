@@ -31,8 +31,9 @@ This repository chronicles my transformation from tutorial consumer to project b
 |-----|---------|--------|---------------|-----------|
 | 01 | Profile Card | ✅ Complete | useState, conditional rendering, Tailwind gradients & transitions | [Code](./src/phase-1-foundations/Day01ProfileCard.jsx) |
 | 02 | Button Library | ✅ Complete | Reusable components, props, variants, compound components | [Code](./src/phase-1-foundations/Day02ButtonLibrary.jsx) |
-| 03 | Color Palette Generator | ✅ Complete | useState, useEffect, color algorithms, localStorage, Canvas API, clipboard API | [Code](./src/phase-1/Day03ColorPalette.jsx) |
-| 04-06 | TBD | ⏳ Upcoming | - | - |
+| 03 | Color Palette Generator | ✅ Complete | useState, useEffect, color algorithms, localStorage, Canvas API, clipboard API | [Code](./src/phase-1-foundations/Day03ColorPalette.jsx) |
+| 04 | Quiz App | ✅ Complete | Complex state management, useEffect timers, conditional rendering, Audio API, leaderboard with localStorage | [Code](./src/phase-1-foundations/Day04QuizApp.jsx) |
+| 05-06 | TBD | ⏳ Upcoming | - | - |
 
 ### Phase 2: Interactive Apps (Days 7-15)
 *State management, APIs, and user interactions*
@@ -188,6 +189,16 @@ npm run dev
 - Created color manipulation algorithms (lighten/darken)
 - Used useEffect for keyboard event listeners
 
+**Day 04 - Interactive Quiz App:**
+- Built multi-step quiz flow with question navigation
+- Implemented countdown timer with useEffect and setInterval
+- Managed complex state with 8 different useState hooks
+- Created conditional styling for correct/incorrect answers (4 visual states)
+- Added sound effects using Audio API
+- Built leaderboard system with localStorage persistence
+- Implemented array sorting and filtering for top scores
+- Used early return pattern for different screen states
+- Learned proper cleanup for intervals to prevent memory leaks
 
 ### Week 2
 - *To be documented...*
@@ -202,11 +213,11 @@ npm run dev
 
 ## 📈 Progress Metrics
 
-- **Days Completed:** 3/30
-- **Projects Built:** 3/9
-- **Lines of Code:** ~990
-- **Components Created:** 4
-- **Concepts Mastered:** 18
+- **Days Completed:** 4/30
+- **Projects Built:** 4/9
+- **Lines of Code:** ~1500
+- **Components Created:** 5
+- **Concepts Mastered:** 26
 
 *Updated daily as the journey progresses*
 
