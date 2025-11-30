@@ -5,6 +5,7 @@ import Day01ProfileCard from "./phase-1-foundations/Day01ProfileCard";
 import Day02ButtonLibrary from "./phase-1-foundations/Day02ButtonLibrary";
 import Day03ColorPallete from "./phase-1-foundations/Day03ColorPallete";
 import Day04QuizApp from "./phase-1-foundations/Day04QuizApp";
+import Day05TodoApp from "./phase-2-interactive/Day05TodoApp";
 
 function App() {
   const [currentDay, setCurrentDay] = useState("day01");
@@ -20,6 +21,8 @@ function App() {
         return <Day03ColorPallete />;
       case "day04":
         return <Day04QuizApp />;
+      case "day05":
+        return <Day05TodoApp />;
       default:
         return <Day01ProfileCard />;
     }
@@ -119,6 +122,18 @@ function App() {
             `}
           >
             Day 04 — Quiz App
+          </button>
+          <button
+            onClick={() => changeDay("day05")}
+            className={`px-3 py-2 rounded text-left text-sm font-medium transition 
+              ${
+                currentDay === "day04"
+                  ? "bg-purple-600 text-white"
+                  : "bg-gray-200 dark:bg-gray-700 dark:text-gray-200 text-gray-800"
+              }
+            `}
+          >
+            Day 05 — TODO App
           </button>
 
         </nav>
