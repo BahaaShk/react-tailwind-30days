@@ -32,8 +32,7 @@ This repository chronicles my transformation from tutorial consumer to project b
 | 01 | Profile Card | ✅ Complete | useState, conditional rendering, Tailwind gradients & transitions | [Code](./src/phase-1-foundations/Day01ProfileCard.jsx) |
 | 02 | Button Library | ✅ Complete | Reusable components, props, variants, compound components | [Code](./src/phase-1-foundations/Day02ButtonLibrary.jsx) |
 | 03 | Color Palette Generator | ✅ Complete | useState, useEffect, color algorithms, localStorage, Canvas API, clipboard API | [Code](./src/phase-1-foundations/Day03ColorPalette.jsx) |
-| 04 | Quiz App | ✅ Complete | Complex state management, useEffect timers, conditional rendering, Audio API, leaderboard with localStorage | [Code](./src/phase-1-foundations/Day04QuizApp.jsx) |
-| 05-06 | TBD | ⏳ Upcoming | - | - |
+| 04-06 | Quiz App | ✅ Complete | Complex state management, useEffect timers, conditional rendering, Audio API, leaderboard with localStorage | [Code](./src/phase-1-foundations/Day04QuizApp.jsx) |
 
 ### Phase 2: Interactive Apps (Days 7-15)
 *State management, APIs, and user interactions*
@@ -141,7 +140,7 @@ react-tailwind-30days/
 
 ```bash
 # Clone the repository
-git clone https://github.com/YOUR_USERNAME/react-tailwind-30days.git
+git clone https://github.com/BahaaShk/react-tailwind-30days.git
 
 # Navigate to project root
 cd react-tailwind-30days

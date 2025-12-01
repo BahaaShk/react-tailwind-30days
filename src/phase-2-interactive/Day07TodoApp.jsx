@@ -1,9 +1,27 @@
-import { Check, X } from "lucide-react";
-import { useState } from "react";
+import { Check, Trash2, X } from "lucide-react";
+import { useEffect, useState } from "react";
 
-const Day05TodoApp = () => {
-  const [todos, setTodos] = useState([]);
+const Day07TodoApp = () => {
+  
   const [text, setText] = useState("");
+  const [editingId, setEditingId] = useState(null);
+const [editingText, setEditingText] = useState("");
+
+const [todos, setTodos] = useState(() => {
+  const saved = JSON.parse(localStorage.getItem('todos'));
+  if (saved) {
+    try {
+      return Array.isArray(saved) ? saved : [];
+    } catch {
+      return [];
+    }
+  }
+});
+
+  useEffect(() => {
+  localStorage.setItem('todos', JSON.stringify(todos))
+  }, [todos])
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -27,6 +45,10 @@ const Day05TodoApp = () => {
       )
     );
   };
+
+  const deleteTodo = (id) => {
+    setTodos(todos.filter((todo) => todo.id !== id))
+  }
 
   return (
     <div className="min-h-screen bg-gray-200 flex justify-center p-6">
@@ -68,13 +90,22 @@ const Day05TodoApp = () => {
               <p className={`${todo.done ? "line-through text-gray-400" : ""}`}>
                 {todo.text}
               </p>
+<div className="items-center justify-center flex">
 
               <button
                 onClick={() => toggleDone(todo.id)}
-                className="p-2 rounded-lg hover:bg-gray-200"
-              >
-                {todo.done ? <X color="red" /> : <Check color="green" />}
+                className="p-2 rounded-lg hover:bg-gray-300"
+                >
+                {todo.done ? <X color="red" size={25} /> : <Check color="green" size={25} />}
               </button>
+              <button
+                onClick={() => deleteTodo(todo.id)}
+                className="p-2 rounded-lg hover:bg-gray-300"
+                >
+                <Trash2 color="red" size={20}  />
+              </button>
+
+                </div>
             </li>
           ))}
         </ul>
@@ -83,4 +114,4 @@ const Day05TodoApp = () => {
   );
 };
 
-export default Day05TodoApp;
+export default Day07TodoApp;
