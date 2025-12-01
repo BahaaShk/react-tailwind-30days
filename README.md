@@ -39,7 +39,8 @@ This repository chronicles my transformation from tutorial consumer to project b
 
 | Day | Project | Status | Key Learnings | Live Code |
 |-----|---------|--------|---------------|-----------|
-| 07-09 | Todo List App | ⏳ Upcoming | CRUD, localStorage, forms | - |
+| 07-09 | Todo List App | ✅ Complete | CRUD, edit mode, filters, better UI, localStorage (lazy init + sync) | [Code](./src/phase-2-interactive/Day07TodoApp.jsx) |
+
 | 10-12 | Pomodoro Timer | ⏳ Upcoming | useEffect, intervals, audio | - |
 | 13-15 | Weather Dashboard | ⏳ Upcoming | API integration, async/await | - |
 
@@ -157,66 +158,12 @@ npm run dev
 
 **All 30 days in one app** - just click the day selector to view different projects!
 
----
-
-## 💡 Key Takeaways (Updated Daily)
-
-### Week 1
-**Day 01 - Profile Card:**
-- Learned useState for theme toggling and avatar switching
-- Mastered Tailwind conditional classes with template literals
-- Understood gradient syntax: `bg-gradient-to-r from-X via-Y to-Z`
-- Implemented smooth transitions with `transition-all duration-300`
-- Used transparency modifiers (`/20`, `/50`) for semi-transparent backgrounds
-- Practiced ternary operators for conditional state changes
-
-**Day 02 - Button Library:**
-- Created reusable component with multiple variants and sizes
-- Learned props with default values pattern
-- Mastered style configuration objects for variants
-- Implemented loading states with conditional rendering
-- Built compound components (ButtonGroup)
-- Used React.cloneElement and Children.toArray for advanced patterns
-
-**Day 03 - Color Palette Generator:**
-- Implemented random color generation with hex math
-- Created color brightness detection for text contrast
-- Used localStorage for persistent data storage
-- Learned Canvas API for image export
-- Implemented Clipboard API for copy functionality
-- Built complex state management with multiple useState hooks
-- Created color manipulation algorithms (lighten/darken)
-- Used useEffect for keyboard event listeners
-
-**Day 04 - Interactive Quiz App:**
-- Built multi-step quiz flow with question navigation
-- Implemented countdown timer with useEffect and setInterval
-- Managed complex state with 8 different useState hooks
-- Created conditional styling for correct/incorrect answers (4 visual states)
-- Added sound effects using Audio API
-- Built leaderboard system with localStorage persistence
-- Implemented array sorting and filtering for top scores
-- Used early return pattern for different screen states
-- Learned proper cleanup for intervals to prevent memory leaks
-
-### Week 2
-- *To be documented...*
-
-### Week 3
-- *To be documented...*
-
-### Week 4
-- *To be documented...*
-
----
 
 ## 📈 Progress Metrics
 
-- **Days Completed:** 4/30
-- **Projects Built:** 4/9
-- **Lines of Code:** ~1500
-- **Components Created:** 5
-- **Concepts Mastered:** 26
+- **Days Completed:** 9/30
+- **Projects Built:** 5/9
+- **Lines of Code:** ~1700
 
 *Updated daily as the journey progresses*
 

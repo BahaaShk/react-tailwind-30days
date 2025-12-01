@@ -1,10 +1,11 @@
-import { Check, Trash2, X } from "lucide-react";
+import { Check, Inbox, Trash2, X } from "lucide-react";
 import { useEffect, useState } from "react";
 
 const Day07TodoApp = () => {
   const [text, setText] = useState("");
   const [editingId, setEditingId] = useState(null);
   const [editingText, setEditingText] = useState("");
+  const [filter, setFilter] = useState("All");
 
   const [todos, setTodos] = useState(() => {
     const saved = JSON.parse(localStorage.getItem("todos"));
@@ -16,6 +17,8 @@ const Day07TodoApp = () => {
       }
     }
   });
+
+    const filterOptions = ["All", "Active", "Completed"];
 
   useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(todos));
@@ -57,8 +60,15 @@ const Day07TodoApp = () => {
     setEditingId(null);
     setEditingText("");
   };
+
+  const filteredTodos = todos.filter((todo) => {
+    if (filter === "Active") return !todo.done;
+    if (filter === "Completed") return todo.done;
+    return true; // "all"
+  });
+
   return (
-    <div className="min-h-screen bg-gray-200 flex justify-center p-6">
+    <div className="min-h-screen bg-gray-200 flex justify-center p-6 transition-all duration-200">
       <div className="w-full max-w-md bg-white p-6 rounded-2xl shadow-2xl">
         <h1 className="text-2xl font-bold mb-4 text-center">Todo List</h1>
 
@@ -80,21 +90,45 @@ const Day07TodoApp = () => {
           </button>
         </form>
 
+        {todos.length !== 0 && (
+          <div className="flex justify-center gap-3 mb-4 rounded-xl p-1 ">
+            {filterOptions.map((option) => (
+              <button
+                key={option}
+                onClick={() => setFilter(option)}
+                className={`px-3 py-1 rounded-lg active:scale-95 transition-all duration-200  ${
+                  filter === option
+                    ? "bg-blue-500 text-white font-bold"
+                    : "bg-gray-100"
+                }`}
+              >
+              {option}
+              </button>
+            ))}
+          </div>
+        )}
+       
+
         {/* Empty state */}
-        {todos.length === 0 && (
-          <p className="text-center font-bold text-gray-500">
-            Oops! It's empty. Add a todo to get started.
+        {filteredTodos.length === 0 && (
+          <div className="flex justify-center items-center flex-col pt-4">
+          <Inbox /> 
+          <p className="text-center font-bold text-gray-500 p-4">
+            Oops! It's empty. Add a todo to get started. 
           </p>
+          </div>
         )}
 
         {/* Todo List */}
         <ul className="space-y-3">
-          {todos.map((todo) => (
+          {filteredTodos.map((todo) => (
             <li
               key={todo.id}
-              className="p-3 bg-gray-100 rounded-lg shadow flex justify-between items-center"
+              className="p-3 bg-gray-100 rounded-lg shadow flex justify-between items-center transition-all duration-300 hover:shadow-xl"
             >
-              <div className={`${todo.done ? "line-through text-gray-400" : ""}`}>
+              <div
+                className={`${todo.done ? "line-through text-gray-400" : ""}`}
+              >
                 {editingId === todo.id ? (
                   <div>
                     <input
@@ -106,7 +140,11 @@ const Day07TodoApp = () => {
                       <button
                         onClick={handleSave}
                         disabled={editingText === ""}
-                        className={`bg-blue-600 text-white px-3 py-1 rounded-lg hover:bg-blue-700 ${editingText === "" ? "cursor-not-allowed opacity-50" : "cursor-pointer"}`}
+                        className={`bg-blue-600 text-white px-3 py-1 rounded-lg hover:bg-blue-700 ${
+                          editingText === ""
+                            ? "cursor-not-allowed opacity-50"
+                            : "cursor-pointer"
+                        }`}
                       >
                         Save
                       </button>
@@ -130,7 +168,11 @@ const Day07TodoApp = () => {
               <div className="items-center justify-center flex gap-1">
                 <button
                   onClick={() => toggleDone(todo.id)}
-                  className={`p-2 rounded-lg hover:bg-gray-300 border border-gray-300 ${editingId !== null ? "cursor-not-allowed opacity-50" : "cursor-pointer"}`}
+                  className={`p-2 rounded-lg hover:bg-gray-300 border border-gray-300 ${
+                    editingId !== null
+                      ? "cursor-not-allowed opacity-50"
+                      : "cursor-pointer"
+                  }`}
                   disabled={editingId !== null}
                 >
                   {todo.done ? (
@@ -141,7 +183,11 @@ const Day07TodoApp = () => {
                 </button>
                 <button
                   onClick={() => deleteTodo(todo.id)}
-                  className={`p-2 rounded-lg hover:bg-gray-300 border border-gray-300 ${editingId !== null ? "cursor-not-allowed opacity-50" : "cursor-pointer"}`}
+                  className={`p-2 rounded-lg hover:bg-gray-300 border border-gray-300 ${
+                    editingId !== null
+                      ? "cursor-not-allowed opacity-50"
+                      : "cursor-pointer"
+                  }`}
                   disabled={editingId !== null}
                 >
                   <Trash2 color="red" size={20} />
@@ -151,7 +197,11 @@ const Day07TodoApp = () => {
                     setEditingId(todo.id);
                     setEditingText(todo.text);
                   }}
-                  className={`p-2 rounded-lg hover:bg-gray-300 border border-gray-300 ${editingId !== null || todo.done ? "cursor-not-allowed opacity-50" : "cursor-pointer"}`}
+                  className={`p-2 rounded-lg hover:bg-gray-300 border border-gray-300 ${
+                    editingId !== null || todo.done
+                      ? "cursor-not-allowed opacity-50"
+                      : "cursor-pointer"
+                  }`}
                   disabled={editingId !== null || todo.done}
                 >
                   Edit
