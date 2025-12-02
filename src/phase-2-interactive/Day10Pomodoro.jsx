@@ -1,5 +1,11 @@
 import { useState, useEffect } from "react";
 
+  const Button = ({btnColor, btnText, onClick}) => {
+return(
+  <button onClick={onClick} className={` cursor-pointer px-4 py-2 rounded-lg bg-${btnColor}-500 text-white`}>{btnText}</button>
+)
+  }
+
 const Day10Pomodoro = () => {
   // -----------------------------
   // 🧠 1. States
@@ -39,11 +45,12 @@ const Day10Pomodoro = () => {
     return () => clearInterval(interval);
   }, [isRunning, minutes, seconds]);
 
+
   // -----------------------------
   // 🎨 4. Basic UI Layout
   // -----------------------------
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-200 p-6">
+    <div className="min-h-screen flex items-center justify-center bg-gray-300">
       <div className="bg-white rounded-xl shadow-xl p-8 w-full max-w-md text-center">
 
         {/* Title */}
@@ -64,26 +71,9 @@ const Day10Pomodoro = () => {
 
         {/* Controls */}
         <div className="flex justify-center gap-4 mb-6">
-          <button
-            onClick={startTimer}
-            className="px-4 py-2 rounded-lg bg-green-500 text-white"
-          >
-            Start
-          </button>
-
-          <button
-            onClick={pauseTimer}
-            className="px-4 py-2 rounded-lg bg-yellow-500 text-white"
-          >
-            Pause
-          </button>
-
-          <button
-            onClick={resetTimer}
-            className="px-4 py-2 rounded-lg bg-red-500 text-white"
-          >
-            Reset
-          </button>
+          <Button onClick={startTimer} btnColor={"green"} btnText={"Start"} />
+          <Button onClick={pauseTimer} btnColor={"yellow"} btnText={"Pause"} />
+          <Button onClick={resetTimer} btnColor={"red"} btnText={"Reset"} />
         </div>
 
         {/* Stats Placeholder (Day 12) */}
