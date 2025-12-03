@@ -1,85 +1,98 @@
 import { useState, useEffect } from "react";
 
-  const Button = ({btnColor, btnText, onClick}) => {
-return(
-  <button onClick={onClick} className={` cursor-pointer px-4 py-2 rounded-lg bg-${btnColor}-500 text-white`}>{btnText}</button>
-)
-  }
+const Button = ({ btnColor, btnText, onClick, disabled }) => {
+  const colorClasses = {
+    green: "bg-green-500",
+    yellow: "bg-yellow-500",
+    red: "bg-red-500",
+  };
+  return (
+    <button
+      onClick={onClick}
+      disabled={disabled}
+      className={`${
+        disabled ? "opacity-50 cursor-not-allowed" : "cursor-pointer"
+      } px-4 py-2 rounded-lg ${colorClasses[btnColor]} text-white`}
+    >
+      {btnText}
+    </button>
+  );
+};
+
+const FOCUS_SECONDS = 25 * 60;
+const BREAK_SECONDS = 5 * 60;
 
 const Day10Pomodoro = () => {
-  // -----------------------------
-  // 🧠 1. States
-  // -----------------------------
-  const [minutes, setMinutes] = useState(25);
-  const [seconds, setSeconds] = useState(0);
+  const [timeLeft, setTimeLeft] = useState(FOCUS_SECONDS);
   const [isRunning, setIsRunning] = useState(false);
-  const [mode, setMode] = useState("focus"); // "focus" or "break"
-  const [cycles, setCycles] = useState(0);   // (Day 12 feature)
+  const [mode, setMode] = useState("focus");
+  const [cycles, setCycles] = useState(0);
 
-  // -----------------------------
-  // 🎛️ 2. Handlers (you fill inside later)
-  // -----------------------------
-  const startTimer = () => {};
-  const pauseTimer = () => {};
-  const resetTimer = () => {};
-
-  // Switch between focus → break (you fill logic)
-  const switchMode = () => {};
-
-  // -----------------------------
-  // ⏱️ 3. Timer useEffect (Day 10)
-  // -----------------------------
+  // Countdown interval
   useEffect(() => {
-    let interval;
+    if (!isRunning) return;
 
-    if (isRunning) {
-      interval = setInterval(() => {
-        // You will implement:
-        // - seconds countdown
-        // - minutes decrease
-        // - when both hit zero → switchMode()
-      }, 1000);
+    const interval = setInterval(() => {
+      setTimeLeft((prev) => prev - 1);
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [isRunning]);
+
+  // Handle switching modes when time reaches 0
+  useEffect(() => {
+    if (timeLeft >= 0) return;
+
+    if (mode === "focus") {
+      setMode("break");
+      setTimeLeft(BREAK_SECONDS);
+      setCycles((c) => c + 1);
+    } else {
+      setMode("focus");
+      setTimeLeft(FOCUS_SECONDS);
     }
 
-    // Cleanup interval (very important)
-    return () => clearInterval(interval);
-  }, [isRunning, minutes, seconds]);
+    setIsRunning(false); // stop timer until user clicks Start again
+  }, [timeLeft, mode]);
 
+  const startTimer = () => setIsRunning(true);
+  const pauseTimer = () => setIsRunning(false);
+  const resetTimer = () => {
+    setIsRunning(false);
+    setMode("focus");
+    setTimeLeft(FOCUS_SECONDS);
+    setCycles(0);
+  };
 
-  // -----------------------------
-  // 🎨 4. Basic UI Layout
-  // -----------------------------
+  const minutes = Math.floor(timeLeft / 60);
+  const seconds = timeLeft % 60;
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-300">
       <div className="bg-white rounded-xl shadow-xl p-8 w-full max-w-md text-center">
-
-        {/* Title */}
-        <h1 className="text-2xl font-bold mb-4">
-          Pomodoro Timer
-        </h1>
-
-        {/* Mode (Focus / Break) */}
+        <h1 className="text-2xl font-bold mb-4">Pomodoro Timer</h1>
         <p className="text-lg font-semibold mb-3">
           {mode === "focus" ? "Focus Time" : "Break Time"}
         </p>
-
-        {/* Timer Display */}
         <div className="text-6xl font-bold my-6 tracking-wide">
-          {String(minutes).padStart(2, "0")}:
-          {String(seconds).padStart(2, "0")}
+          {String(minutes).padStart(2, "0")}:{String(seconds).padStart(2, "0")}
         </div>
-
-        {/* Controls */}
         <div className="flex justify-center gap-4 mb-6">
-          <Button onClick={startTimer} btnColor={"green"} btnText={"Start"} />
-          <Button onClick={pauseTimer} btnColor={"yellow"} btnText={"Pause"} />
-          <Button onClick={resetTimer} btnColor={"red"} btnText={"Reset"} />
+          <Button
+            onClick={startTimer}
+            btnColor="green"
+            btnText="Start"
+            disabled={isRunning}
+          />
+          <Button
+            onClick={pauseTimer}
+            btnColor="yellow"
+            btnText="Pause"
+            disabled={!isRunning}
+          />
+          <Button onClick={resetTimer} btnColor="red" btnText="Reset" />
         </div>
-
-        {/* Stats Placeholder (Day 12) */}
-        <div className="text-sm text-gray-600">
-          Cycles completed: {cycles}
-        </div>
+        <div className="text-sm text-gray-600">Cycles completed: {cycles}</div>
       </div>
     </div>
   );
