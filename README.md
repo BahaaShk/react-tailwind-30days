@@ -41,7 +41,8 @@ This repository chronicles my transformation from tutorial consumer to project b
 |-----|---------|--------|---------------|-----------|
 | 07-09 | Todo List App | ✅ Complete | CRUD, edit mode, filters, better UI, localStorage (lazy init + sync) | [Code](./src/phase-2-interactive/Day07TodoApp.jsx) |
 
-| 10-12 | Pomodoro Timer | ⏳ Upcoming | useEffect, intervals, audio | - |
+| 10-12 | Pomodoro Timer | ✅ Complete | useEffect with intervals, single source-of-truth state, mode switching, cycles counting, audio/notifications, Tailwind animations, ring/progress bar, localStorage persistence | [Code](./src/phase-2-interactive/Day10Pomodoro.jsx) |
+
 | 13-15 | Weather Dashboard | ⏳ Upcoming | API integration, async/await | - |
 
 ### Phase 3: Real-World Projects (Days 16-30)
@@ -161,9 +162,9 @@ npm run dev
 
 ## 📈 Progress Metrics
 
-- **Days Completed:** 9/30
-- **Projects Built:** 5/9
-- **Lines of Code:** ~1700
+- **Days Completed:** 12/30
+- **Projects Built:** 6/9
+- **Lines of Code:** ~2000
 
 *Updated daily as the journey progresses*
 
